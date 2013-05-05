@@ -5,7 +5,7 @@ public class Lista {
 	protected No fim = null;
 
 	public Lista() {
-		// TODO Auto-generated constructor stub
+		//Nothing to do here
 	}
 	
 	public No getInicio(){
@@ -29,7 +29,6 @@ public class Lista {
 	
 	public void insereFinal(int valor){
 		No atual = inicio;
-		No tmp;
 		if(inicio == null){
 			//Lista vazia
 			insereInicio(valor);
@@ -87,7 +86,7 @@ public class Lista {
 		
 		return tmp.getValor();
 	}
-	
+	//Imprimir a lista
 	public String imprimir(){
 		No atual = inicio;
 		String saida = "";
@@ -104,7 +103,10 @@ public class Lista {
 		
 		return saida;
 	}
-	
+	/*
+	 * Imprimir a lista inversamente a partir do ultimo no para testar as ligações 
+	 * usando as referencias de anteriores
+	 * */
 	public void imprimirInverso(){
 		No atual = fim;
 		while(atual != null){
@@ -139,9 +141,8 @@ public class Lista {
 	        //Enquanto o proximo não for igual ao final
 	        //Sendo q no começo o final é null
 	        while(atual.getProximo() != fim){
-	        	
 	            proximo = inicio.getProximo();
-	            
+	            //Trocando os Nos de posicao quando é trocado o primeiro nó
 	            if(atual.getValor() > proximo.getValor()){
 	                atual.setProximo(proximo.getProximo());
 	                proximo.getProximo().setAnterior(atual);
@@ -151,16 +152,16 @@ public class Lista {
 	                
 	                inicio = proximo;
 	                inicio.setAnterior(null);
+	                
 	                proximo = atual.getProximo();
-	                
-	                //System.out.println("O inicio agora é: "+inicio.getValor());
-	                
 	            }else{
 	                atual = atual.getProximo();
 	                proximo = proximo.getProximo();
 	            }
 	
 	            anterior = inicio;
+	            
+	            //Proximos nos
 	            //Enquanto o proximo não for o fim da lista
 	            while(proximo != fim){
 	                if(atual.getValor() > proximo.getValor()){
@@ -185,9 +186,11 @@ public class Lista {
 	                    proximo = proximo.getProximo();
 	                }
 	            }
+	            
 	            if(fim == null){
 	            	this.fim = atual;
 	            }
+	            
 	            fim = atual;
 	            atual = inicio;
 	        }
@@ -195,7 +198,7 @@ public class Lista {
 	}
 	
 	public void ordernarInsertion(){
-		No atual, pivo, inserirAntes, retirado,proximoPivo;
+		No pivo, inserirAntes, proximoPivo;
 		if(inicio == null){
 			System.out.println("Lista vazia");
 			System.exit(0);
@@ -215,39 +218,17 @@ public class Lista {
 						break;
 					}
 				}
-				
-				if(pivo.getValor() < inserirAntes.getValor()){
-					inserirAntes(retirar(pivo),inserirAntes);
-				}
+				//colocando o no a esquerda do no encontrado
+				inserirAntes(retirar(pivo),inserirAntes);
 				
 				pivo = proximoPivo;
-				//if(pivo != null) System.out.println(pivo.getValor()+" é o novo pivo");
 			}
-			
 		}
-						
-			
 	}
 	
-	protected void trocar(No praFrente, No praTras){
-		
-		praFrente.setProximo(praTras.getProximo());
-		praTras.setAnterior(praFrente.getAnterior());
-		if(praTras.getProximo() != null){
-			praTras.getProximo().setAnterior(praFrente);
-		}
-		if(praFrente.getAnterior() != null){
-			praFrente.getAnterior().setProximo(praTras);
-		}
-		
-		praTras.setProximo(praFrente);
-		praFrente.setAnterior(praTras);
-		
-		if(praTras.getAnterior() == null) inicio = praTras;
-		if(praFrente.getProximo() == null) fim = praFrente;
-		
-	}
-	
+	/*
+	 * Retira o no da lista e atualiza as ligações
+	 * */
 	protected No retirar(No alvo){
 		//System.out.println(alvo.getValor()+" retirado");
 		if(alvo.getAnterior() != null){
@@ -266,6 +247,10 @@ public class Lista {
 		return alvo;
 		
 	}
+	
+	/*
+	 * Insere o no fornecido antes do No alvo
+	 * */
 	protected void inserirAntes(No inserir, No alvo){
 		
 		if(alvo.getAnterior() != null){
