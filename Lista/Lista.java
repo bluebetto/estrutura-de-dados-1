@@ -172,40 +172,6 @@ public class Lista {
   
   } // fim ordenar
   
-  public void ordernarInsertionSort() throws Exception{
-	  No atual, proximo, fim;
-	  if(inicio == null){
-		  throw new Exception("Lista vazia");
-	  }else if(inicio.getProx() == null){
-		  return;
-	  }else{
-		  atual = inicio;
-		  fim = null;
-		  proximo = atual.getProx();
-		  
-		  while(proximo != fim){
-			  if(atual.getValor() > proximo.getValor()){
-				  System.out.println("Trocando "+atual.getValor()+" com "+proximo.getValor());
-				  atual.setProx(proximo.getProx());
-                  proximo.setProx(atual);
-                  inicio = proximo;
-                  proximo = atual.getProx();
-			  }
-			  System.out.println("Atual: "+atual.getValor()+", proximo: "+proximo.getValor());
-			  
-			  while(proximo != fim){
-				  if(atual.getValor() > proximo.getValor()){
-					  
-				  }
-			  }
-			  imprimir();
-			  System.exit(0);
-			  
-			  proximo = proximo.getProx();
-		  }
-		  
-	  }
-  }
   
   public int tamanho(){
 	  int i = 0;
