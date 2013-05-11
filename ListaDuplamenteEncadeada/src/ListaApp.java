@@ -20,19 +20,14 @@ public class ListaApp {
 		*/
 		
 		for(int i=10;i>0;i--) lista.insereFinal(i);
-		
-		//System.out.println("\n--- Invertida");
-		//lista.imprimirInverso();
+
 		System.out.println(lista.imprimir());
-		lista.ordernarInsertion();
+		lista.ordernarSelection();
 		System.out.println("\n Ordenada");
 		System.out.println(lista.imprimir());
 		System.out.println("\n--- Invertida");
 		lista.imprimirInverso();
-		
-		
-		
-		
+
 	}
 
 }
