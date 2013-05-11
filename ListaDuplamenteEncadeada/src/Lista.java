@@ -1,4 +1,3 @@
-
 public class Lista {
 	
 	protected No inicio = null;
@@ -104,7 +103,7 @@ public class Lista {
 		return saida;
 	}
 	/*
-	 * Imprimir a lista inversamente a partir do ultimo no para testar as ligações 
+	 * Imprimir a lista inversamente a partir do ultimo no para testar as ligaï¿½ï¿½es 
 	 * usando as referencias de anteriores
 	 * */
 	public void imprimirInverso(){
@@ -134,15 +133,15 @@ public class Lista {
 	        System.out.println("1 elemento");
 	    }else{
 	    	//A lista tem mais de 2 elementos
-	        //Pré inicializando o loop
+	        //Prï¿½ inicializando o loop
 	        atual = inicio;
 	        proximo  = inicio.getProximo();
 	        fim = null;
-	        //Enquanto o proximo não for igual ao final
-	        //Sendo q no começo o final é null
+	        //Enquanto o proximo nï¿½o for igual ao final
+	        //Sendo q no comeï¿½o o final ï¿½ null
 	        while(atual.getProximo() != fim){
 	            proximo = inicio.getProximo();
-	            //Trocando os Nos de posicao quando é trocado o primeiro nó
+	            //Trocando os Nos de posicao quando ï¿½ trocado o primeiro nï¿½
 	            if(atual.getValor() > proximo.getValor()){
 	                atual.setProximo(proximo.getProximo());
 	                proximo.getProximo().setAnterior(atual);
@@ -162,7 +161,7 @@ public class Lista {
 	            anterior = inicio;
 	            
 	            //Proximos nos
-	            //Enquanto o proximo não for o fim da lista
+	            //Enquanto o proximo nï¿½o for o fim da lista
 	            while(proximo != fim){
 	                if(atual.getValor() > proximo.getValor()){
 	                    //System.out.println(atual.getValor()+ " > "+proximo.getValor()+": trocado");
@@ -199,6 +198,7 @@ public class Lista {
 	
 	public void ordernarInsertion(){
 		No pivo, inserirAntes, proximoPivo;
+		int i = 0;
 		if(inicio == null){
 			System.out.println("Lista vazia");
 			System.exit(0);
@@ -210,16 +210,15 @@ public class Lista {
 			while(pivo != null){
 				inserirAntes = pivo;
 				proximoPivo = pivo.getProximo();
+				i=0;
 				while(inserirAntes.getAnterior() != null && inserirAntes.getAnterior().getValor() > pivo.getValor()) {
 					//Encontrando o menor numero para colocar o pivo a direita
-					if(inserirAntes.getAnterior() != null){
-						inserirAntes = inserirAntes.getAnterior();
-					}else{
-						break;
-					}
+					i++;
+					inserirAntes = inserirAntes.getAnterior();
 				}
 				//colocando o no a esquerda do no encontrado
-				inserirAntes(retirar(pivo),inserirAntes);
+				// Quando i = 0, o nÃ³ vai manter a mesma posiÃ§Ã£o
+				if(i>0) inserirAntes(retirar(pivo),inserirAntes);
 				
 				pivo = proximoPivo;
 			}
@@ -301,7 +300,7 @@ public class Lista {
 	}
 	
 	/*
-	 * Retira o no da lista e atualiza as ligações
+	 * Retira o no da lista e atualiza as ligaï¿½ï¿½es
 	 * */
 	protected No retirar(No alvo){
 		//System.out.println(alvo.getValor()+" retirado");
