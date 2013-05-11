@@ -226,6 +226,80 @@ public class Lista {
 		}
 	}
 	
+	public void ordernarSelection(){
+		No ordenado = inicio;
+		No atual;
+		No menor;
+		
+		while(ordenado != null){
+			atual = ordenado;
+			menor = atual;
+			do{
+				if(menor.getValor() > atual.getValor()){
+					menor = atual;
+				}
+				atual = atual.getProximo();
+			
+			}while(atual != null);
+			
+			if(ordenado.getValor() > menor.getValor()){
+				trocar(ordenado,menor);
+				ordenado = menor;
+			}
+			ordenado = ordenado.getProximo();
+		}
+		
+	}
+	
+	
+	public void ordernarShell(){
+		int tamanho = tamanho();
+		
+		No pivo;
+		No primeiro = inicio;
+		
+		for(int pedaco = tamanho/2; pedaco > 0; pedaco /=2){
+			pivo = avancar(primeiro, pedaco);
+			do{
+				while(primeiro.getValor() > pivo.getValor()){
+					trocar(pivo,primeiro);
+				}
+				primeiro = primeiro.getProximo();
+				pivo = pivo.getProximo();
+			}while(pivo != null);
+			
+		}
+	}
+	
+	protected No retornar(No alvo, int i){
+		int j = 0;
+		while(j < i && alvo != null){
+			alvo = alvo.getAnterior();
+			j++;
+		}
+		return alvo;
+	}
+	
+	protected No avancar(No alvo, int i){
+		int j = 0;
+		while(j < i && alvo != null){
+			alvo = alvo.getProximo();
+			j++;
+		}
+		
+		return alvo;
+	}
+	
+	protected No encontrar(int index){
+		No atual = inicio;
+		int i = 0;
+		
+		while(atual != null && i++ != index){
+			atual = atual.getProximo();
+		}
+		return atual;
+	}
+	
 	/*
 	 * Retira o no da lista e atualiza as ligações
 	 * */
@@ -259,9 +333,41 @@ public class Lista {
 		}else{
 			inicio = inserir;
 		}
-		//System.out.println(inserir.getValor()+" colocado antes de "+alvo.getValor());
+
 		alvo.setAnterior(inserir);
 		inserir.setProximo(alvo);
+	}
+	
+	protected void inserirDepois(No inserir, No alvo){
+		if(alvo.getProximo() != null){
+			alvo.getProximo().setAnterior(inserir);
+			inserir.setProximo(alvo.getProximo());
+		}else{
+			fim = inserir;
+		}
+		
+		alvo.setProximo(inserir);
+		inserir.setAnterior(alvo);
+	}
+	
+	protected void trocar(No praFrente, No praTras){
+		if(praFrente.getProximo() == praTras){
+			No proximoDoPraTras = praTras.getProximo();
+			No antesDoPraFrente = praFrente.getAnterior();
+			
+			inserirAntes(retirar(praFrente),proximoDoPraTras);
+			inserirDepois(retirar(praTras),antesDoPraFrente);
+		}else{
+			No antesDoPraTras = praTras.getAnterior();
+			No depoisDoPraFrente = praFrente.getProximo();
+			
+			inserirDepois(retirar(praFrente),antesDoPraTras);
+			inserirAntes(retirar(praTras), depoisDoPraFrente);
+		}
+		
+	    if(praTras.getAnterior() == null) inicio = praTras;
+	    if(praFrente.getProximo() == null) fim = praFrente;
+	    
 	}
 	
 }
